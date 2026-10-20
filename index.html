@@ -1,0 +1,531 @@
+<title>Tong Li</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: Apple-style product page. Full-bleed bands that alternate white and light gray, one 1080px column, large rounded panels, centered hero, oversized tight headings. */
+:root {
+  --bg: #ffffff;
+  --bg-alt: #f5f5f7;
+  --panel: #f5f5f7;
+  --panel-alt: #ffffff;
+  --chip: rgba(0, 0, 0, 0.06);
+  --fg: #1d1d1f;
+  --fg-2: #6e6e73;
+  --line: rgba(0, 0, 0, 0.12);
+  --accent: #5D78AC;
+  --btn: #5D78AC;
+  --btn-hover: #50699A;
+  --btn-fg: #ffffff;
+  --nav-bg: rgba(255, 255, 255, 0.78);
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --maxw: 1080px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #000000;
+    --bg-alt: #111113;
+    --panel: #1c1c1e;
+    --panel-alt: #1c1c1e;
+    --chip: rgba(255, 255, 255, 0.1);
+    --fg: #f5f5f7;
+    --fg-2: #a1a1a6;
+    --line: rgba(255, 255, 255, 0.16);
+    --accent: #5D78AC;
+    --nav-bg: rgba(0, 0, 0, 0.72);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #000000;
+  --bg-alt: #111113;
+  --panel: #1c1c1e;
+  --panel-alt: #1c1c1e;
+  --chip: rgba(255, 255, 255, 0.1);
+  --fg: #f5f5f7;
+  --fg-2: #a1a1a6;
+  --line: rgba(255, 255, 255, 0.16);
+  --accent: #5D78AC;
+  --nav-bg: rgba(0, 0, 0, 0.72);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: 17px;
+  line-height: 1.47;
+  letter-spacing: -0.012em;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+ul { margin: 0; padding: 0; list-style: none; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { text-wrap: balance; }
+
+.wrap { max-width: var(--maxw); margin-inline: auto; padding-inline: max(16px, 4vw); }
+
+/* Nav */
+.nav {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 10;
+  background: var(--nav-bg);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--line);
+}
+.nav .wrap { height: 48px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.brand { font-size: 15px; font-weight: 600; color: var(--fg); letter-spacing: -0.01em; }
+.brand:hover { text-decoration: none; }
+.nav ul { display: flex; gap: clamp(14px, 3vw, 32px); }
+.nav ul a { font-size: 12px; color: var(--fg-2); letter-spacing: 0; }
+.nav ul a:hover { color: var(--fg); text-decoration: none; }
+
+/* Hero */
+.hero { text-align: center; padding-block: clamp(56px, 9vw, 112px) clamp(48px, 7vw, 88px); }
+.hero .eyebrow { font-size: clamp(17px, 2vw, 21px); font-weight: 600; color: var(--fg-2); letter-spacing: -0.015em; }
+.hero h1 {
+  margin-top: 12px;
+  font-size: clamp(64px, 14vw, 136px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+.hero .lead {
+  max-width: 22em;
+  margin: 24px auto 0;
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -0.022em;
+  color: var(--fg-2);
+  text-wrap: balance;
+}
+.hero .lead strong { color: var(--fg); font-weight: 600; }
+.cta { margin-top: 32px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 28px; }
+.btn {
+  display: inline-block;
+  padding: 12px 22px;
+  background: var(--btn);
+  color: var(--btn-fg);
+  border-radius: 980px;
+  font-size: 17px;
+  line-height: 1.2;
+  transition: background-color 0.2s;
+}
+.btn:hover { background: var(--btn-hover); text-decoration: none; }
+.more { font-size: 17px; }
+.more::after { content: " \203A"; }
+
+/* Bands and headings */
+.band { padding-block: clamp(64px, 9vw, 112px); --card: var(--panel); }
+.band.alt { background: var(--bg-alt); --card: var(--panel-alt); }
+.band.tight { padding-top: clamp(8px, 2vw, 24px); }
+section[id] { scroll-margin-top: 48px; }
+.head { margin-bottom: clamp(32px, 5vw, 56px); }
+.head h2 { font-size: clamp(34px, 5.4vw, 56px); font-weight: 700; line-height: 1.07; letter-spacing: -0.035em; }
+.head p { margin-top: 12px; max-width: 30em; font-size: clamp(19px, 2.2vw, 24px); line-height: 1.25; letter-spacing: -0.02em; color: var(--fg-2); font-weight: 500; text-wrap: balance; }
+.label { font-size: 12px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--fg-2); }
+
+/* Key numbers */
+.stats { display: grid; gap: 16px; grid-template-columns: 1fr; }
+@media (min-width: 560px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 900px) { .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.stat { background: var(--card); border-radius: 28px; padding: clamp(24px, 3vw, 36px); display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.stat .num { font-size: clamp(44px, 5vw, 60px); font-weight: 700; line-height: 1; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.stat .num small { font-size: 0.5em; font-weight: 600; letter-spacing: -0.02em; color: var(--fg-2); margin-left: 0.15em; }
+.stat .num .arrow { color: var(--fg-2); font-weight: 500; }
+.stat p { color: var(--fg-2); font-size: 17px; line-height: 1.35; }
+
+/* Work panels */
+.stack { display: grid; gap: 20px; }
+.work { background: var(--card); border-radius: 28px; padding: clamp(24px, 4vw, 48px); display: grid; gap: 28px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 860px) { .work { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; } }
+.work h3 { margin-top: 8px; font-size: clamp(24px, 3vw, 32px); font-weight: 700; line-height: 1.12; letter-spacing: -0.028em; }
+.work .org { margin-top: 8px; color: var(--fg-2); font-size: 17px; }
+.tags { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 8px; }
+.tags li { background: var(--chip); color: var(--fg-2); font-size: 13px; line-height: 1; padding: 7px 11px; border-radius: 980px; letter-spacing: 0; }
+.points { display: grid; gap: 16px; align-content: start; }
+.points li { position: relative; padding-left: 18px; }
+.points li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.work.feature h3 { font-size: clamp(28px, 3.6vw, 40px); }
+
+/* Project filter */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.filters button {
+  font: inherit;
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: -0.005em;
+  padding: 10px 16px;
+  border-radius: 980px;
+  border: 0;
+  background: var(--chip);
+  color: var(--fg);
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+.filters button:hover { background: var(--line); }
+.filters button[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
+.status { margin-bottom: 20px; font-size: 14px; color: var(--fg-2); min-height: 1.4em; }
+
+/* Education */
+.edu { background: var(--card); border-radius: 28px; padding: clamp(24px, 4vw, 48px); display: grid; gap: 36px; }
+.edu h3 { margin-top: 8px; font-size: clamp(26px, 3.4vw, 36px); font-weight: 700; line-height: 1.1; letter-spacing: -0.03em; }
+.degrees { display: grid; gap: 28px 40px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 700px) { .degrees { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.degree { border-top: 1px solid var(--line); padding-top: 20px; display: grid; gap: 6px; align-content: start; }
+.degree .name { font-size: 21px; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; }
+.degree .when { color: var(--fg-2); font-size: 15px; }
+.gpa { margin-top: 10px; font-size: clamp(44px, 5vw, 60px); font-weight: 700; line-height: 1; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+.gpa small { font-size: 0.4em; color: var(--fg-2); font-weight: 600; letter-spacing: -0.01em; margin-left: 0.2em; }
+.courses h4 { margin: 0 0 14px; font-size: 12px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--fg-2); }
+.courses .tags { margin-top: 0; }
+.courses .tags li { font-size: 15px; padding: 9px 14px; color: var(--fg); }
+/* Contact */
+.contact { text-align: center; }
+.contact h2 { font-size: clamp(40px, 7vw, 80px); font-weight: 700; line-height: 1.03; letter-spacing: -0.045em; }
+.contact .sub { margin: 16px auto 0; max-width: 26em; font-size: clamp(19px, 2.2vw, 24px); line-height: 1.25; color: var(--fg-2); font-weight: 500; letter-spacing: -0.02em; text-wrap: balance; }
+.mail { margin-top: 36px; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px 16px; }
+.mail .addr { font-size: clamp(20px, 3.4vw, 30px); font-weight: 600; letter-spacing: -0.02em; overflow-wrap: anywhere; user-select: all; }
+.mail button {
+  font: inherit;
+  font-size: 15px;
+  line-height: 1;
+  padding: 11px 18px;
+  border-radius: 980px;
+  border: 0;
+  background: var(--chip);
+  color: var(--fg);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.mail button:hover { background: var(--line); }
+
+footer { background: var(--bg-alt); border-top: 1px solid var(--line); padding-block: 24px calc(24px + env(safe-area-inset-bottom, 0px)); font-size: 12px; color: var(--fg-2); letter-spacing: 0; }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; }
+</style>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">Tong Li</a>
+    <nav aria-label="Sections">
+      <ul>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow">M.S. Electrical &amp; Computer Engineering, UIUC</p>
+      <h1>Tong Li</h1>
+      <p class="lead"><strong>I build FPGA accelerators, custom processors and embedded systems,</strong> and train AI agents to use the web.</p>
+      <div class="cta">
+        <a class="btn" href="#research">See the work</a>
+        <a class="more" href="#contact">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band tight" aria-labelledby="results-h">
+    <div class="wrap">
+      <div class="head"><h2 id="results-h">Selected results</h2></div>
+      <div class="stats">
+        <div class="stat">
+          <span class="label">Ultrasound beamforming</span>
+          <span class="num">12,000+</span>
+          <p>acquisitions processed per second on an FPGA running at 200&nbsp;MHz.</p>
+        </div>
+        <div class="stat">
+          <span class="label">Alveo V80 integration</span>
+          <span class="num">10<small>GB/s+</small></span>
+          <p>data rate to the host PC over PCIe/QDMA, through the Versal network-on-chip.</p>
+        </div>
+        <div class="stat">
+          <span class="label">Web agent research</span>
+          <span class="num">20h <span class="arrow">&rarr;</span> 3h</span>
+          <p>for a full WebArena evaluation pass, using 16 parallel browser workers.</p>
+        </div>
+        <div class="stat">
+          <span class="label">LeNet on Zynq</span>
+          <span class="num">3.67&times;</span>
+          <p>faster than ARM software across 10,000 handwritten-digit images.</p>
+        </div>
+        <div class="stat">
+          <span class="label">Out-of-order RV32IM CPU</span>
+          <span class="num">10%+</span>
+          <p>higher IPC than the course baseline, from a GShare predictor, BTB, RAS and prefetcher.</p>
+        </div>
+        <div class="stat">
+          <span class="label">Out-of-order RV32IM CPU</span>
+          <span class="num">100%</span>
+          <p>RV32IM instruction coverage in a coverage-driven UVM testbench.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="research" aria-labelledby="research-h">
+    <div class="wrap">
+      <div class="head">
+        <h2 id="research-h">Research</h2>
+        <p>Two roles, from FPGA silicon at the Beckman Institute to LLM agents with IBM.</p>
+      </div>
+      <div class="stack">
+        <article class="work feature">
+          <div>
+            <p class="label">Summer 2025 &ndash; Present</p>
+            <h3>FPGA Accelerator for Ultrafast Ultrasound Beamforming</h3>
+            <p class="org">Graduate Research Assistant, Beckman Institute, UIUC</p>
+            <ul class="tags" aria-label="Technologies">
+              <li>Vitis HLS</li><li>MATLAB</li><li>AMD Alveo V80</li><li>AVED</li><li>Versal NoC</li><li>PCIe/QDMA</li>
+            </ul>
+          </div>
+          <ul class="points">
+            <li>Built a high-speed beamforming engine in Vitis HLS that turns raw signals from a 128-channel ultrasound probe into images, at over 12,000 acquisitions per second at 200&nbsp;MHz.</li>
+            <li>Implemented a five-stage streaming pipeline of HLS kernels: data loading, 4&times; interpolation, transmit/receive delay compensation and multi-angle compounding, tuned for memory throughput and logic usage.</li>
+            <li>Developed a MATLAB-to-HLS verification flow that checks every pipeline stage against a reference model, using real ultrasound scanner data.</li>
+            <li>Integrating the engine into AMD&rsquo;s Alveo V80 with AVED, routing data to high-speed memory through the Versal network-on-chip and to the host PC over PCIe/QDMA at over 10&nbsp;GB/s.</li>
+          </ul>
+        </article>
+
+        <article class="work feature">
+          <div>
+            <p class="label">Fall 2025</p>
+            <h3>Web Navigation Agent Research</h3>
+            <p class="org">Research Intern, IBM&ndash;Illinois Discovery Accelerator Institute</p>
+            <ul class="tags" aria-label="Technologies">
+              <li>Llama-3.1-8B</li><li>PyTorch</li><li>DeepSpeed ZeRO-3</li><li>Reinforcement learning</li><li>WebArena</li>
+            </ul>
+          </div>
+          <ul class="points">
+            <li>Built an end-to-end training pipeline for Llama-3.1-8B web agents that complete multi-step tasks across 800+ WebArena benchmark tasks, combining supervised fine-tuning with reinforcement learning on intermediate progress rewards.</li>
+            <li>Scaled full-parameter training across 4 nodes and 16 GPUs with PyTorch and DeepSpeed ZeRO-3, and parallelized evaluation over 16 browser workers, cutting a full evaluation pass from 20 hours to 3 hours.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="projects" aria-labelledby="projects-h">
+    <div class="wrap">
+      <div class="head">
+        <h2 id="projects-h">Projects</h2>
+        <p>A processor, an OS kernel, two FPGA designs and a self-driving robot car.</p>
+      </div>
+
+      <div class="filters" role="group" aria-label="Filter projects by area">
+        <button type="button" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" data-filter="fpga" aria-pressed="false">FPGA</button>
+        <button type="button" data-filter="embedded" aria-pressed="false">Embedded</button>
+        <button type="button" data-filter="ml" aria-pressed="false">Machine learning</button>
+        <button type="button" data-filter="architecture" aria-pressed="false">Architecture</button>
+        <button type="button" data-filter="systems" aria-pressed="false">Systems</button>
+      </div>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+
+      <div class="stack" id="project-list">
+        <article class="work" data-areas="fpga embedded">
+          <div>
+            <p class="label">Fall 2026</p>
+            <h3>FPGA Data Acquisition and Peripheral Control</h3>
+            <ul class="tags" aria-label="Technologies">
+              <li>Verilog</li><li>Python</li><li>Xilinx Artix-7</li><li>Vivado</li>
+            </ul>
+          </div>
+          <ul class="points">
+            <li>Brought up a CMV300 global-shutter camera with SPI configuration and a hardware power-up sequencer. Built an FPGA-to-PC image pipeline with FIFOs, DDR3 buffering, DMA and USB, and verified 30 consecutive 648&times;488 frames pixel-for-pixel against test patterns.</li>
+            <li>Designed Verilog I2C and step/direction controllers for temperature sensing, accelerometer reads and stepper-motor control, all operated from one Python interface on the PC.</li>
+          </ul>
+        </article>
+
+        <article class="work" data-areas="embedded ml">
+          <div>
+            <p class="label">Fall 2026</p>
+            <h3>Autonomous Raspberry Pi Vehicle</h3>
+            <ul class="tags" aria-label="Technologies">
+              <li>Python</li><li>Raspberry Pi</li><li>OpenCV</li><li>TensorFlow Lite</li><li>Electron</li><li>Bluetooth</li><li>TCP/IP</li>
+            </ul>
+          </div>
+          <ul class="points">
+            <li>Built a self-driving robot car using SLAM with ultrasonic sensor data for mapping and localization, A* for route planning, and periodic scans to replan around obstacles.</li>
+            <li>Integrated OpenCV and TensorFlow Lite for on-device traffic-sign detection and vehicle safety commands. Developed an Electron desktop control panel and Bluetooth/Wi-Fi communication for driving commands and sensor feedback.</li>
+          </ul>
+        </article>
+
+        <article class="work" data-areas="fpga ml">
+          <div>
+            <p class="label">Fall 2025</p>
+            <h3>FPGA-Accelerated LeNet Inference on Zynq</h3>
+            <ul class="tags" aria-label="Technologies">
+              <li>C++</li><li>PYNQ-Z2</li><li>AXI</li><li>Vivado</li><li>Vitis HLS</li>
+            </ul>
+          </div>
+          <ul class="points">
+            <li>Accelerated three convolution layers of a LeNet handwritten-digit classifier in C++/HLS at 100&nbsp;MHz on the PYNQ-Z2, with AXI interfaces for ARM control and memory transfers.</li>
+            <li>Pipelined convolution loops, unrolled multiply-accumulate operations and reused data in on-chip buffers, for a 3.67&times; speedup over ARM software across 10,000 images.</li>
+          </ul>
+        </article>
+
+        <article class="work" data-areas="architecture">
+          <div>
+            <p class="label">Spring 2025</p>
+            <h3>Out-of-Order RV32IM Processor</h3>
+            <ul class="tags" aria-label="Technologies">
+              <li>SystemVerilog</li><li>UVM</li><li>Synopsys VCS</li><li>Design Compiler</li>
+            </ul>
+          </div>
+          <ul class="points">
+            <li>Co-designed a high-performance out-of-order RISC-V CPU in SystemVerilog with explicit register renaming (128 physical registers), a 32-entry reorder buffer, branch misprediction recovery and 4-way instruction and data caches, synthesized with Synopsys Design Compiler to meet timing and area targets.</li>
+            <li>Outperformed the course&rsquo;s baseline processor in speed and power-performance on every benchmark, including CoreMark, raising IPC by over 10% with a GShare branch predictor (BTB, RAS), a next-line prefetcher and split load/store queues. Verified against Spike/RVFI and a coverage-driven UVM testbench with 100% RV32IM instruction coverage.</li>
+          </ul>
+        </article>
+
+        <article class="work" data-areas="systems">
+          <div>
+            <p class="label">Fall 2023</p>
+            <h3>Unix-like OS Kernel</h3>
+            <ul class="tags" aria-label="Technologies">
+              <li>C</li><li>x86 Assembly</li>
+            </ul>
+          </div>
+          <ul class="points">
+            <li>Developed a Unix-like OS kernel in C and x86 assembly, implementing system calls, virtual-memory paging, exception and interrupt handling, and device drivers.</li>
+            <li>Developed RTC and terminal drivers and in-memory file-system support, and implemented round-robin scheduling across multiple terminal sessions.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="education" aria-labelledby="education-h">
+    <div class="wrap">
+      <div class="head"><h2 id="education-h">Education</h2></div>
+      <div class="edu">
+        <div>
+          <p class="label">School</p>
+          <h3>University of Illinois Urbana-Champaign</h3>
+        </div>
+        <div class="degrees">
+          <div class="degree">
+            <p class="name">M.S. Electrical and Computer Engineering</p>
+            <p class="when">Expected May 2027</p>
+            <p class="gpa">3.77<small>/ 4.0 GPA</small></p>
+          </div>
+          <div class="degree">
+            <p class="name">B.S. Computer Engineering</p>
+            <p class="when">Undergraduate</p>
+            <p class="gpa">3.9<small>/ 4.0 GPA</small></p>
+          </div>
+        </div>
+        <div class="courses">
+          <h4>Research areas</h4>
+          <ul class="tags">
+            <li>RTL Design</li><li>FPGA</li><li>Ultrasound Beamforming</li><li>Hardware Acceleration</li><li>High-Level Synthesis</li><li>Hardware Verification</li>
+          </ul>
+        </div>
+        <div class="courses">
+          <h4>Relevant coursework</h4>
+          <ul class="tags">
+            <li>Operating Systems</li><li>Data Structures and Algorithms</li><li>Database Systems</li><li>Machine Learning</li><li>Computer Architecture</li><li>Embedded Systems Design</li><li>SoC Design</li><li>Networked IoT</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band contact" id="contact" aria-labelledby="contact-h">
+    <div class="wrap">
+      <h2 id="contact-h">Get in touch.</h2>
+      <p class="sub">Questions about the work, or something to talk through? Send a note.</p>
+      <div class="mail">
+        <a class="addr" id="addr" href="mailto:tongli5@illinois.edu">tongli5@illinois.edu</a>
+        <button type="button" id="copy">Copy address</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>&copy; 2026 Tong Li</span>
+    <span>University of Illinois Urbana-Champaign</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // In-page navigation
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('href').slice(1);
+      var target = id === 'top' ? document.body : document.getElementById(id);
+      if (!target) return;
+      e.preventDefault();
+      if (id === 'top') window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+      else target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    });
+  });
+
+  // Project filter
+  var buttons = document.querySelectorAll('.filters button');
+  var cards = document.querySelectorAll('#project-list .work');
+  var status = document.getElementById('status');
+  var names = { all: 'all areas', fpga: 'FPGA', embedded: 'Embedded', ml: 'Machine learning', architecture: 'Architecture', systems: 'Systems' };
+  buttons.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var f = btn.getAttribute('data-filter');
+      var shown = 0;
+      buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
+      cards.forEach(function (c) {
+        var match = f === 'all' || c.getAttribute('data-areas').split(' ').indexOf(f) !== -1;
+        c.hidden = !match;
+        if (match) shown++;
+      });
+      status.textContent = f === 'all' ? '' : 'Showing ' + shown + ' of ' + cards.length + ' projects in ' + names[f] + '.';
+    });
+  });
+
+  // Copy email
+  var copy = document.getElementById('copy');
+  var addr = document.getElementById('addr');
+  var timer;
+  function flash(msg) {
+    copy.textContent = msg;
+    clearTimeout(timer);
+    timer = setTimeout(function () { copy.textContent = 'Copy address'; }, 2200);
+  }
+  copy.addEventListener('click', function () {
+    var text = addr.textContent.trim();
+    var fallback = function () {
+      var r = document.createRange();
+      r.selectNodeContents(addr);
+      var s = window.getSelection();
+      s.removeAllRanges();
+      s.addRange(r);
+      flash('Selected, press copy');
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { flash('Copied'); }, fallback);
+    } else {
+      fallback();
+    }
+  });
+})();
+</script>
